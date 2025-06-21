@@ -24,8 +24,23 @@
   <option value="Activo">Activo</option>
   <option value="Inactivo">Inactivo</option>
 </select>
+// carga formulario
+<h2>Nuevo contacto</h2>
+<form id="formContacto" onsubmit="agregarContacto(); return false;">
+  <input type="text" id="nuevoNombre" placeholder="Nombre" required />
+  <input type="text" id="nuevoApellido" placeholder="Apellido" required />
+  <input type="email" id="nuevoEmail" placeholder="Email" required />
+  <input type="text" id="nuevoTelefono" placeholder="Teléfono" required />
+  <select id="nuevaSituacion" required>
+    <option value="Activo">Activo</option>
+    <option value="Inactivo">Inactivo</option>
+  </select>
+  <button type="submit">Agregar contacto</button>
+</form>
 
 
+
+// tabla
 <table id="contactTable">
   <thead>
     <tr>
@@ -41,6 +56,38 @@
 </table>
 
 <script>
+
+
+// contactos = [...];
+
+function mostrarContactos(lista) {
+  ...
+}
+
+function filtrar() {
+  ...
+}
+
+// acá abajo pegás esto 👇
+function agregarContacto() {
+  const nombre = document.getElementById("nuevoNombre").value.trim();
+  const apellido = document.getElementById("nuevoApellido").value.trim();
+  const email = document.getElementById("nuevoEmail").value.trim();
+  const telefono = document.getElementById("nuevoTelefono").value.trim();
+  const situacion = document.getElementById("nuevaSituacion").value;
+
+  if (!nombre || !apellido || !email || !telefono) {
+    alert("Por favor completá todos los campos.");
+    return;
+  }
+
+  const nuevo = { nombre, apellido, email, telefono, situacion };
+  contactos.push(nuevo);
+  mostrarContactos(contactos);
+  document.getElementById("formContacto").reset();
+}
+</script>
+
 // Simulación de lista de contactos
 const contactos = [
   { nombre: "Silvio", apellido: "Acosta", email: "silvio@example.com", telefono: "123456789", situacion: "Activo" },
