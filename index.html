@@ -19,6 +19,13 @@
 
 <input type="text" id="searchInput" placeholder="Buscar por nombre..." onkeyup="filtrar()" />
 
+<select id="situacionFiltro" onchange="filtrar()" style="margin-left: 10px;">
+  <option value="todos">Todos</option>
+  <option value="Activo">Activo</option>
+  <option value="Inactivo">Inactivo</option>
+</select>
+
+
 <table id="contactTable">
   <thead>
     <tr>
@@ -109,9 +116,17 @@ function mostrarContactos(lista) {
 // Función para filtrar la tabla por nombre
 function filtrar() {
   const texto = document.getElementById("searchInput").value.toLowerCase();
-  const filtrados = contactos.filter(c => c.nombre.toLowerCase().includes(texto));
+  const situacion = document.getElementById("situacionFiltro").value;
+
+  const filtrados = contactos.filter(c => {
+    const coincideNombre = c.nombre.toLowerCase().includes(texto);
+    const coincideSituacion = (situacion === "todos" || c.situacion === situacion);
+    return coincideNombre && coincideSituacion;
+  });
+
   mostrarContactos(filtrados);
 }
+
 
 // Mostrar todos los contactos inicialmente
 mostrarContactos(contactos);
