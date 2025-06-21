@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Proyecto 1 - Gestión de Contactos</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  input[type="text"] { padding: 6px; width: 300px; margin-bottom: 10px; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+  th { background: #eee; }
+  tr:hover { background: #f1f1f1; }
+</style>
+</head>
+<body>
+
+<h1>Gestión de Contactos - Proyecto 1</h1>
+
+<input type="text" id="searchInput" placeholder="Buscar por nombre..." onkeyup="filtrar()" />
+
+<table id="contactTable">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Apellido</th>
+      <th>Email</th>
+      <th>Teléfono</th>
+      <th>Situación</th>
+    </tr>
+  </thead>
+  <tbody id="contactBody">
+  </tbody>
+</table>
+
+<script>
+// Simulación de lista de contactos
+const contactos = [
+  { nombre: "Silvio", apellido: "Acosta", email: "silvio@example.com", telefono: "123456789", situacion: "Activo" },
+  { nombre: "María", apellido: "Pérez", email: "maria@example.com", telefono: "987654321", situacion: "Inactivo" },
+  { nombre: "Juan", apellido: "Gómez", email: "juan@example.com", telefono: "456789123", situacion: "Activo" },
+  // Agregá más contactos acá para probar...
+];
+
+// Función para mostrar los contactos en la tabla
+function mostrarContactos(lista) {
+  const tbody = document.getElementById("contactBody");
+  tbody.innerHTML = "";
+  lista.forEach(c => {
+    const fila = document.createElement("tr");
+    fila.innerHTML = `
+      <td>${c.nombre}</td>
+      <td>${c.apellido}</td>
+      <td>${c.email}</td>
+      <td>${c.telefono}</td>
+      <td>${c.situacion}</td>
+    `;
+    tbody.appendChild(fila);
+  });
+}
+
+// Función para filtrar la tabla por nombre
+function filtrar() {
+  const texto = document.getElementById("searchInput").value.toLowerCase();
+  const filtrados = contactos.filter(c => c.nombre.toLowerCase().includes(texto));
+  mostrarContactos(filtrados);
+}
+
+// Mostrar todos los contactos inicialmente
+mostrarContactos(contactos);
+</script>
+
+</body>
+</html>
+
